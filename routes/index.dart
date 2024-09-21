@@ -9,7 +9,7 @@ List<Map<String, dynamic>> jsonDataList = [];
 
 Future<Response> onRequest(RequestContext context) async {
   if (context.request.method == HttpMethod.get) {
-    print('Get Method is Called');
+    print('Get Method Called');
     return Response.json(body: jsonDataList);
   }
 
@@ -20,7 +20,7 @@ Future<Response> onRequest(RequestContext context) async {
     if (data['title'] == 'clear' && data['description'] == 'clear') {
       jsonDataList.clear();
       print('Data is Cleared Successfully');
-      return Response.json(body: {'message': 'Data is Cleared Successfully'});
+      return Response.json(body: {'message': 'Data Cleared Successfully'});
     } else {
       final itemIndex = jsonDataList.indexWhere(
         (item) =>
@@ -52,7 +52,7 @@ Future<Response> onRequest(RequestContext context) async {
         }
 
         print('The $data is Added');
-        return Response.json(body: {'message': 'Item is Added Successfully'});
+        return Response.json(body: {'message': 'Item Added Successfully'});
       }
     }
   }
@@ -72,7 +72,7 @@ Future<Response> onRequest(RequestContext context) async {
       jsonDataList.removeAt(itemIndex);
       print('The $data is Deleted');
       print(body);
-      return Response.json(body: {'message': 'Item is Deleted Successfully'});
+      return Response.json(body: {'message': 'Item Deleted Successfully'});
     }
   }
 
@@ -90,7 +90,7 @@ Future<Response> onRequest(RequestContext context) async {
       jsonDataList[itemIndex]['title'] = title;
       jsonDataList[itemIndex]['description'] = description;
       print(body);
-      return Response.json(body: {'message': 'Item is Updated Successfully'});
+      return Response.json(body: {'message': 'Item Updated Successfully'});
     } else {
       return Response.json(
         body: {'error': 'Item Not Found'},
