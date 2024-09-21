@@ -1,5 +1,5 @@
-name: my_project
-description: A new Dart Frog application
+name: dart_frog_server
+description: A new Dart Frog sample server
 version: 1.0.0+1
 publish_to: none
 
