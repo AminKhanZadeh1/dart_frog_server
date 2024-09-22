@@ -1,5 +1,9 @@
 // ignore_for_file: unnecessary_lambdas, avoid_print
 
+// I hope this project is helpful to you
+// Please follow me on GitHub:
+// AminKhanZadeh1
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,18 +13,20 @@ List<Map<String, dynamic>> jsonDataList = [];
 
 Future<Response> onRequest(RequestContext context) async {
   if (context.request.method == HttpMethod.get) {
-    print('Get Method Called');
+    print('GET method called');
     return Response.json(body: jsonDataList);
   }
 
   final body = await context.request.body();
   final data = jsonDecode(body) as Map<String, dynamic>;
   if (context.request.method == HttpMethod.post) {
-    print('Post Method is Called');
+    print('POST method called');
     if (data['title'] == 'clear' && data['description'] == 'clear') {
       jsonDataList.clear();
-      print('Data is Cleared Successfully');
-      return Response.json(body: {'message': 'Data Cleared Successfully'});
+      print('Json list cleared');
+      return Response.json(
+        body: {'message': 'Data cleared successfully'},
+      );
     } else {
       final itemIndex = jsonDataList.indexWhere(
         (item) =>
@@ -28,8 +34,8 @@ Future<Response> onRequest(RequestContext context) async {
             item['description'] == data['description'],
       );
       if (itemIndex != -1) {
-        print('Item Already Exists');
-        return Response.json(body: {'message': 'Item Already Exists'});
+        print('Item already exists');
+        return Response.json(body: {'message': 'Item already exists'});
       } else {
         if (jsonDataList.isEmpty) {
           const id = 0;
@@ -51,32 +57,39 @@ Future<Response> onRequest(RequestContext context) async {
           );
         }
 
-        print('The $data is Added');
-        return Response.json(body: {'message': 'Item Added Successfully'});
+        print('The $data added');
+        return Response.json(
+          body: {'message': 'Item added successfully'},
+        );
       }
     }
   }
 
   if (context.request.method == HttpMethod.delete) {
+    print('DELETE method called');
     final itemIndex = jsonDataList.indexWhere(
       (item) =>
           item['title'] == data['title'] &&
           item['description'] == data['description'],
     );
     if (itemIndex == -1) {
+      print('Item is not found');
       return Response.json(
-        body: {'error': 'Item Not Found'},
+        body: {'error': 'Item is not found'},
         statusCode: HttpStatus.notFound,
       );
     } else {
       jsonDataList.removeAt(itemIndex);
-      print('The $data is Deleted');
-      print(body);
-      return Response.json(body: {'message': 'Item Deleted Successfully'});
+      print('The $data deleted');
+      print('Body: $body');
+      return Response.json(
+        body: {'message': 'Item is deleted successfully'},
+      );
     }
   }
 
   if (context.request.method == HttpMethod.put) {
+    print('PUT method called');
     final title = data['title'] as String;
     final description = data['description'] as String;
 
@@ -89,18 +102,22 @@ Future<Response> onRequest(RequestContext context) async {
     if (itemIndex != -1) {
       jsonDataList[itemIndex]['title'] = title;
       jsonDataList[itemIndex]['description'] = description;
-      print(body);
-      return Response.json(body: {'message': 'Item Updated Successfully'});
-    } else {
+      print('Item updated successfully');
+      print('Body: $body');
       return Response.json(
-        body: {'error': 'Item Not Found'},
+        body: {'message': 'Item updated successfully'},
+      );
+    } else {
+      print('Item not found');
+      return Response.json(
+        body: {'error': 'Item not found'},
         statusCode: HttpStatus.notFound,
       );
     }
   }
 
   return Response.json(
-    body: {'error': 'Method Not Allowed'},
+    body: {'error': 'Method not allowed'},
     statusCode: HttpStatus.methodNotAllowed,
   );
 }
