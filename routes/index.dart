@@ -16,6 +16,11 @@ import 'package:dart_frog/dart_frog.dart';
 List<Map<String, dynamic>> jsonDataList = [];
 
 Future<Response> onRequest(RequestContext context) async {
+  //
+
+  //
+
+  // GET
   if (context.request.method == HttpMethod.get) {
     print('GET method called');
     return Response.json(body: jsonDataList);
@@ -23,6 +28,12 @@ Future<Response> onRequest(RequestContext context) async {
 
   final body = await context.request.body();
   final data = jsonDecode(body) as Map<String, dynamic>;
+
+  //
+
+  //
+
+  // POST
   if (context.request.method == HttpMethod.post) {
     print('POST method called');
     if (data['title'] == 'clear' && data['description'] == 'clear') {
@@ -68,7 +79,11 @@ Future<Response> onRequest(RequestContext context) async {
       }
     }
   }
+  //
 
+  //
+
+  // DELETE
   if (context.request.method == HttpMethod.delete) {
     print('DELETE method called');
     final itemIndex = jsonDataList.indexWhere(
@@ -91,7 +106,11 @@ Future<Response> onRequest(RequestContext context) async {
       );
     }
   }
+  //
 
+  //
+
+  // PUT
   if (context.request.method == HttpMethod.put) {
     print('PUT method called');
     final title = data['title'] as String;
