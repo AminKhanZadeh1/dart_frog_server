@@ -4,6 +4,10 @@
 // Please follow me on GitHub:
 // AminKhanZadeh1
 
+// There are 2 entities named title and description in the project
+
+// You can change them or add new ones if you want
+
 import 'dart:convert';
 import 'dart:io';
 
