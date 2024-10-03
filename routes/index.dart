@@ -92,17 +92,16 @@ Future<Response> onRequest(RequestContext context) async {
           item['description'] == data['description'],
     );
     if (itemIndex == -1) {
-      print('Item is not found');
+      print('Item not found');
       return Response.json(
-        body: {'error': 'Item is not found'},
+        body: {'error': 'Item not found'},
         statusCode: HttpStatus.notFound,
       );
     } else {
       jsonDataList.removeAt(itemIndex);
       print('The $data deleted');
-      print('Body: $body');
       return Response.json(
-        body: {'message': 'Item is deleted successfully'},
+        body: {'message': 'Item deleted successfully'},
       );
     }
   }
